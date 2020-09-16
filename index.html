@@ -8,7 +8,10 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
     <title>JS + CSS Clock</title>
   </head>
   <body>
@@ -29,9 +32,26 @@
           </div>
         </div>
       </div>
+      <footer>
+        <a href="https://github.com/wolkeval/js30-clock" target="_blank"
+          >Open-source code</a
+        >
+        by Valeria Strusi<br />as part of the JavaScript 30 challenge 👩‍💻
+      </footer>
     </div>
 
     <style>
+      a {
+        color: #545271;
+        font-weight: 900;
+        text-decoration: underline;
+      }
+
+      a:hover {
+        color: #545271;
+        text-decoration: none;
+      }
+
       body {
         background-image: linear-gradient(
           to right,
@@ -42,7 +62,7 @@
         );
         background-size: cover;
         display: flex;
-        font-family: "helvetica neue";
+        font-family: "Montserrat", sans-serif;
         font-size: 2rem;
         text-align: center;
         margin: 0;
@@ -52,7 +72,20 @@
 
       h1 {
         color: #ffff;
-        font-size: 70px;
+        font-size: 75px;
+        font-weight: 600;
+      }
+
+      footer {
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0 auto;
+        position: fixed;
+        left: 50%;
+        bottom: 10px;
+        transform: translate(-50%, -50%);
+        margin: 0 auto;
       }
 
       .clock {
