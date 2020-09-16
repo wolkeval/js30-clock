@@ -2,45 +2,71 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+
     <title>JS + CSS Clock</title>
   </head>
   <body>
-    <div class="clock">
-      <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>17:30</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="clock">
+            <div class="clock-face">
+              <div class="hand hour-hand"></div>
+              <div class="hand min-hand"></div>
+              <div class="hand second-hand"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <style>
-      html {
-        background: #018ded url(https://unsplash.it/1500/1000?image=881&blur=5);
-        background-size: cover;
-        font-family: "helvetica neue";
-        text-align: center;
-        font-size: 10px;
-      }
-
       body {
-        margin: 0;
-        font-size: 2rem;
+        background-image: linear-gradient(
+          to right,
+          #f78ca0 0%,
+          #f9748f 19%,
+          #fd868c 60%,
+          #fe9a8b 100%
+        );
+        background-size: cover;
         display: flex;
-        flex: 1;
+        font-family: "helvetica neue";
+        font-size: 2rem;
+        text-align: center;
+        margin: 0;
         min-height: 100vh;
         align-items: center;
       }
 
+      h1 {
+        color: #ffff;
+        font-size: 70px;
+      }
+
       .clock {
-        width: 30rem;
-        height: 30rem;
-        border: 20px solid white;
+        width: 300px;
+        height: 300px;
+        border: 20px solid #545271;
         border-radius: 50%;
+        background-color: white;
         margin: 50px auto;
         position: relative;
         padding: 2rem;
-        box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
-          inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+          0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+          0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
       }
 
       .clock-face {
@@ -53,18 +79,59 @@
       }
 
       .hand {
-        width: 50%;
-        height: 6px;
-        background: black;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+          0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+          0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+        border-radius: 10px;
         position: absolute;
         top: 50%;
         transform-origin: 100%;
         transform: rotate(90deg);
         transition: all 0.05s;
         transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+        width: 50%;
+      }
+
+      .hand.second-hand,
+      .hand.min-hand {
+        height: 6px;
+      }
+
+      .hand.min-hand,
+      .hand.hour-hand {
+        background: #5aabfe;
+      }
+
+      .hand.second-hand {
+        background: orangered;
+      }
+
+      .hand.hour-hand {
+        height: 3px;
       }
     </style>
     <script>
+      // TIME =================================================================
+      function leadingZero(value) {
+        if (value < 10) {
+          return (value = `0${value}`);
+        } else {
+          return value;
+        }
+      }
+
+      function formatTime() {
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        let time = `${leadingZero(hours)}:${leadingZero(minutes)}`;
+        return time;
+      }
+
+      let now = new Date();
+      let timeElement = document.querySelector("h1");
+      timeElement.innerHTML = formatTime(now);
+
+      // CLOCK ================================================================
       const secondsElement = document.querySelector(".second-hand");
       const minutesElement = document.querySelector(".min-hand");
       const hoursElement = document.querySelector(".hour-hand");
